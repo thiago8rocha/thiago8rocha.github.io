@@ -1,0 +1,30 @@
+---
+import type { Lang } from '../data/types';
+import { getContent } from '../data';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const { profile, ui } = getContent(lang);
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="container">
+    <div class="cols">
+      <div>
+        <div class="brand-big">&lt;TR /&gt;</div>
+        <p>{ui.footer.builtBy}</p>
+        <ul>
+          <li><a href="https://github.com/thiago8rocha/thiago8rocha.github.io/actions" rel="noopener">{ui.footer.pipeline}</a></li>
+          <li><a href="/test-report/">{ui.footer.testReport}</a></li>
+        </ul>
+      </div>
+      <ul aria-label={ui.sections.contact}>
+        <li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
+        {profile.location && <li>{profile.location}</li>}
+        <li><a href={profile.linkedin} rel="noopener">LinkedIn</a></li>
+        <li><a href={profile.github} rel="noopener">GitHub</a></li>
+      </ul>
+    </div>
+    <p class="copy">© {year} {profile.name}. {ui.footer.rights}</p>
+  </div>
+</footer>

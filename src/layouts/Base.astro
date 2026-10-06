@@ -1,0 +1,93 @@
+---
+import '../styles/global.css';
+import type { Lang } from '../data/types';
+import { getContent } from '../data';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = getContent(lang);
+const site = 'https://thiago8rocha.github.io';
+const url = site + (lang === 'en' ? '/' : '/pt/');
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: c.profile.name,
+  jobTitle: c.profile.title,
+  url: site + '/',
+  email: `mailto:${c.profile.email}`,
+  sameAs: [c.profile.linkedin, c.profile.github],
+};
+---
+<!doctype html>
+<html lang={c.ui.htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{c.ui.siteTitle}</title>
+    <meta name="description" content={c.ui.metaDescription} />
+    <link rel="canonical" href={url} />
+    <link rel="alternate" hreflang="en" href={site + '/'} />
+    <link rel="alternate" hreflang="pt-BR" href={site + '/pt/'} />
+    <link rel="alternate" hreflang="x-default" href={site + '/'} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={c.ui.siteTitle} />
+    <meta property="og:description" content={c.ui.metaDescription} />
+    <meta property="og:url" content={url} />
+    <meta property="og:image" content={site + '/og.png'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script is:inline>
+      try {
+        var t = localStorage.getItem('theme');
+        if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <slot />
+    <script>
+      const root = document.documentElement;
+      document.querySelector('[data-theme-toggle]')?.addEventListener('click', (e) => {
+        const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = next;
+        (e.currentTarget as HTMLElement).setAttribute('aria-pressed', String(next === 'dark'));
+        try { localStorage.setItem('theme', next); } catch {}
+      });
+      document.querySelector('[data-theme-toggle]')?.setAttribute('aria-pressed', String(root.dataset.theme === 'dark'));
+
+      const menuBtn = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+      const nav = document.getElementById('site-nav');
+      menuBtn?.addEventListener('click', () => {
+        const open = nav?.classList.toggle('open') ?? false;
+        menuBtn.setAttribute('aria-expanded', String(open));
+      });
+      nav?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
+        nav.classList.remove('open');
+        menuBtn?.setAttribute('aria-expanded', 'false');
+      }));
+
+      document.querySelectorAll<HTMLButtonElement>('[data-more-toggle]').forEach((btn) => {
+        const target = document.getElementById(btn.dataset.target ?? '');
+        btn.addEventListener('click', () => {
+          if (!target) return;
+          const expanded = btn.getAttribute('aria-expanded') === 'true';
+          target.hidden = expanded;
+          btn.setAttribute('aria-expanded', String(!expanded));
+          btn.textContent = expanded ? btn.dataset.more ?? '' : btn.dataset.less ?? '';
+        });
+      });
+
+      const filterBtns = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+      filterBtns.forEach((btn) => btn.addEventListener('click', () => {
+        filterBtns.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        const f = btn.dataset.filter;
+        document.querySelectorAll<HTMLElement>('[data-kinds]').forEach((card) => {
+          const kinds = (card.dataset.kinds ?? '').split('|');
+          card.hidden = f !== 'all' && !kinds.includes(f ?? '');
+        });
+      }));
+    </script>
+  </body>
+</html>

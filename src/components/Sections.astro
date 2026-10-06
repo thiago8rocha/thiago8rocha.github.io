@@ -1,0 +1,146 @@
+---
+import type { Lang } from '../data/types';
+import { getContent } from '../data';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = getContent(lang);
+const { ui } = c;
+const kinds = [...new Set(c.projects.flatMap((p) => p.kind))];
+---
+<section class="block" id="about" aria-labelledby="about-h">
+  <div class="container">
+    <div class="section-head"><h2 id="about-h">{ui.sections.about}</h2></div>
+    <div class="two-col">
+      <div>{c.about.paragraphs.map((p) => <p>{p}</p>)}</div>
+      <div class="card now">
+        <h3>{ui.about.currently}</h3>
+        <ul>{c.about.currently.map((i) => <li>{i}</li>)}</ul>
+      </div>
+    </div>
+    <h3 class="eyebrow" style="margin-top:1.5rem">{ui.about.domains}</h3>
+    <ul class="chips">{c.about.domains.map((d) => <li class="chip">{d}</li>)}</ul>
+    <div class="highlights">
+      {c.about.highlights.map((h) => <div class="card"><h3>{h.title}</h3><p>{h.text}</p></div>)}
+    </div>
+  </div>
+</section>
+
+<section class="block" id="process" aria-labelledby="process-h">
+  <div class="container">
+    <div class="section-head"><h2 id="process-h">{ui.sections.process}</h2></div>
+    <ol class="steps">
+      {c.process.map((s) => (
+        <li class="card">
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+          <ul>{s.deliverables.map((d) => <li>{d}</li>)}</ul>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<section class="block" id="experience" aria-labelledby="experience-h">
+  <div class="container">
+    <div class="section-head"><h2 id="experience-h">{ui.sections.experience}</h2></div>
+    <ol class="timeline">
+      {c.experience.map((job, i) => (
+        <li class="job card">
+          <h3>{job.company}</h3>
+          <div class="place">{job.place}</div>
+          {job.roles.map((r) => <div class="role"><span>{r.title}</span><span class="period">{r.period}</span></div>)}
+          <p style="margin-top:0.5rem">{job.summary}</p>
+          <ul>{job.bullets.map((b) => <li>{b}</li>)}</ul>
+          {job.extraBullets.length > 0 && (
+            <>
+              <ul class="more" id={`more-${i}`} hidden>{job.extraBullets.map((b) => <li>{b}</li>)}</ul>
+              <button class="link-btn" type="button" data-more-toggle data-target={`more-${i}`} data-more={ui.experience.showMore} data-less={ui.experience.showLess} aria-expanded="false" aria-controls={`more-${i}`}>{ui.experience.showMore}</button>
+            </>
+          )}
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<section class="block" id="projects" aria-labelledby="projects-h">
+  <div class="container">
+    <div class="section-head"><h2 id="projects-h">{ui.sections.projects}</h2></div>
+    <article class="card feature" aria-labelledby="feat-h">
+      <p class="eyebrow">{ui.projects.featured}</p>
+      <h3 id="feat-h">{c.featured.title}</h3>
+      <p>{c.featured.summary}</p>
+      <ol class="arch" aria-label="Architecture layers">
+        {c.featured.layers.map((l) => <li><strong>{l.name}</strong><span>{l.detail}</span></li>)}
+      </ol>
+      <p><strong>{ui.projects.role}:</strong> {c.featured.role}</p>
+      <ul class="chips">{[...c.featured.testTypes, ...c.featured.tools].map((t) => <li class="chip">{t}</li>)}</ul>
+      <p class="note" style="margin-top:1rem">{c.featured.confidentialityNote}</p>
+    </article>
+
+    <h3>{ui.projects.others}</h3>
+    <div class="filters" role="group" aria-label={ui.projects.filterLabel}>
+      <button type="button" data-filter="all" aria-pressed="true">{ui.projects.filterAll}</button>
+      {kinds.map((k) => <button type="button" data-filter={k} aria-pressed="false">{k}</button>)}
+    </div>
+    <ul class="grid-cards">
+      {c.projects.map((p) => (
+        <li data-kinds={p.kind.join('|')}>
+          <article class="card pcard">
+            <h3>{p.title}</h3>
+            <p class="muted-note">{p.kind.join(' · ')}</p>
+            <p>{p.summary}</p>
+            <dl>
+              <dt>{ui.projects.role}</dt><dd>{p.role}</dd>
+              <dt>{ui.projects.testTypes}</dt><dd>{p.testTypes.join(', ')}</dd>
+              <dt>{ui.projects.tools}</dt><dd>{p.tools.join(', ')}</dd>
+            </dl>
+            {p.link && <p style="margin-top:0.75rem"><a href={p.link.href} rel="noopener">{p.link.label}<span class="sr-only"> ({p.title})</span></a></p>}
+          </article>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<section class="block" id="skills" aria-labelledby="skills-h">
+  <div class="container">
+    <div class="section-head"><h2 id="skills-h">{ui.sections.skills}</h2><p class="muted-note">{ui.skills.dailyNote}</p></div>
+    <div class="skill-groups">
+      {c.skills.map((g) => (
+        <div class="card">
+          <h3>{g.group}</h3>
+          <ul class="chips">{g.items.map((i) => <li class:list={['chip', { daily: i.daily }]}>{i.name}</li>)}</ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="block" id="education" aria-labelledby="edu-h">
+  <div class="container">
+    <div class="section-head"><h2 id="edu-h">{ui.sections.education}</h2></div>
+    <div class="edu">
+      <div class="card"><ul>{c.education.degrees.map((d) => <li><strong>{d.title}</strong><br />{d.place}, {d.year}</li>)}</ul></div>
+      <div class="card"><ul>{c.education.certifications.map((d) => <li>{d.title}{d.year ? ` (${d.year})` : ''}</li>)}</ul></div>
+      <div class="card"><ul>{c.education.languages.map((d) => <li>{d.name}: {d.level}</li>)}</ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="block contact" id="contact" aria-labelledby="contact-h">
+  <div class="container">
+    <h2 id="contact-h">{ui.sections.contact}</h2>
+    <p>{ui.contact.intro}</p>
+    <p><a class="btn" href={`mailto:${c.profile.email}`}>{ui.contact.cta}</a></p>
+    <ul class="links" style="justify-content:center">
+      <li><a href={c.profile.linkedin} rel="noopener">LinkedIn</a></li>
+      <li><a href={c.profile.github} rel="noopener">GitHub</a></li>
+    </ul>
+  </div>
+</section>
+
+<style is:global>
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>

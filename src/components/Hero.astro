@@ -1,0 +1,33 @@
+---
+import type { Lang } from '../data/types';
+import { getContent } from '../data';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const { profile, ui } = getContent(lang);
+const t = profile.terminal;
+---
+<section class="hero" id="top">
+  <div class="container grid">
+    <div>
+      <h1>{profile.name}</h1>
+      <p class="title">{profile.title}</p>
+      <p class="tagline">{profile.tagline}</p>
+      <div class="actions">
+        <a class="btn" href={profile.resumeFile} download>{ui.hero.downloadResume}</a>
+        <a class="btn secondary" href="#projects">{ui.hero.viewProjects}</a>
+      </div>
+      <ul class="links">
+        <li><a href={profile.linkedin} rel="noopener">LinkedIn</a></li>
+        <li><a href={profile.github} rel="noopener">GitHub</a></li>
+        <li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
+      </ul>
+    </div>
+    <div class="terminal" role="img" aria-label={`${t.command}: ${t.lines.map((l) => `${l.label} ${l.value}`).join('; ')}`}>
+      <div class="tbar" aria-hidden="true"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      <pre aria-hidden="true"><span class="cmd">$ {t.command}</span>
+{t.lines.map((l) => <><span class="ok">✓</span> {l.label}: <strong>{l.value}</strong>{'\n'}</>)}
+<span class="muted">{'\n'}{t.lines.length} passed · {t.summary}</span></pre>
+    </div>
+  </div>
+</section>
