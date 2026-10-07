@@ -50,7 +50,7 @@ Selectors use roles and labels only. Each spec runs in two Playwright projects, 
 | `resume` | Resume button points to a real PDF | The main call to action must not break |
 | `links` | LinkedIn, GitHub and `mailto:` destinations | A wrong contact link defeats the site |
 | `a11y` | axe (WCAG 2.2 AA) in both languages and both themes, zero violations | Accessibility is part of the QA brand |
-| `content` | No visible `TODO` and no images of people | Keeps unfinished content out of production |
+| `content` | No visible `TODO`; the only image is the logo (no photo or avatar) | Keeps unfinished content out of production |
 
 ## Pipeline
 

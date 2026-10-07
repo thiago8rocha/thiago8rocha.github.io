@@ -33,7 +33,7 @@ const S = ui.sections;
   </div>
 </section>
 
-<section class="section alt" id="process" aria-labelledby="process-h">
+<section class="section" id="process" aria-labelledby="process-h">
   <div class="container">
     <SectionHead id="process-h" no="02" label={S.process.label} heading={S.process.heading} intro={S.process.intro} />
     <ol class="steps">
@@ -62,6 +62,7 @@ const S = ui.sections;
         return (
           <li class:list={['job', { current: job.current }]}>
             <div class="when"><span>{range}</span>{job.current && <span class="badge">{ui.experience.current}</span>}</div>
+            <span class="node" aria-hidden="true"></span>
             <div class="card">
               {job.roles.length > 1 ? (
                 <>
@@ -93,7 +94,7 @@ const S = ui.sections;
   </div>
 </section>
 
-<section class="section alt" id="projects" aria-labelledby="projects-h">
+<section class="section" id="projects" aria-labelledby="projects-h">
   <div class="container">
     <SectionHead id="projects-h" no="04" label={S.projects.label} heading={S.projects.heading} intro={S.projects.intro} />
     <article class="card feature" aria-labelledby="feat-h">
@@ -166,14 +167,21 @@ const S = ui.sections;
   </div>
 </section>
 
-<section class="section alt" id="education" aria-labelledby="edu-h">
+<section class="section tight" id="education" aria-labelledby="edu-h">
   <div class="container">
     <SectionHead id="edu-h" no="06" label={S.education.label} heading={S.education.heading} />
-    <div class="edu">
-      <div class="card"><ul>{c.education.degrees.map((d) => <li><strong>{d.title}</strong><small>{d.place}, {d.year}</small></li>)}</ul></div>
-      <div class="card"><ul>{c.education.certifications.map((d) => <li>{d.title}{d.year ? ` (${d.year})` : ''}</li>)}</ul></div>
-      <div class="card"><ul>{c.education.languages.map((d) => <li><strong>{d.name}</strong><small>{d.level}</small></li>)}</ul></div>
-    </div>
+    <ul class="edu-grid">
+      {c.education.map((e) => (
+        <li class="card edu lift">
+          <div class="edu-icon"><Icon name={e.icon === 'degree' ? 'graduation' : e.icon === 'cert' ? 'award' : 'book'} /></div>
+          <div>
+            <h3>{e.title}</h3>
+            <p>{e.place}</p>
+            <p class="mono edu-meta">{e.meta}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
   </div>
 </section>
 

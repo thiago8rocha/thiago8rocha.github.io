@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 244 96" role="img" aria-label="TOR">
+  <defs>
+    <linearGradient id="g" gradientUnits="userSpaceOnUse" x1="14" y1="0" x2="186" y2="0">
+      <stop offset="0" stop-color="#14b8a6"/>
+      <stop offset="1" stop-color="#22c55e"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#g)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <!-- T -->
+    <path d="M14 24H62M38 24V72"/>
+    <!-- O = lente da lupa + cabo -->
+    <circle cx="104" cy="48" r="24"/>
+    <path d="M86 66L68 84"/>
+    <!-- R -->
+    <path d="M150 72V24H168a14 14 0 0 1 0 28H150M166 52l16 20"/>
+  </g>
+  <!-- check dentro do O -->
+  <path d="M93 49l8 8 15-17" fill="none" stroke="#22c55e" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- trilhas de circuito -->
+  <g fill="none" stroke="#14b8a6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M196 34h12l8-8h12M196 48h30M196 62h12l8 8h12"/>
+  </g>
+  <g fill="#22c55e">
+    <circle cx="232" cy="26" r="3.5"/><circle cx="230" cy="48" r="3.5"/><circle cx="232" cy="70" r="3.5"/>
+  </g>
+</svg>

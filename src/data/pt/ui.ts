@@ -24,5 +24,5 @@ export const ui: Ui = {
   projects: { featured: 'Destaque', filterAll: 'Todos', filterLabel: 'Filtrar projetos', filterProfessional: 'Profissionais', filterPersonal: 'Pessoais', role: 'Meu papel', testTypes: 'Testes', tools: 'Ferramentas', architecture: 'Arquitetura do framework' },
   skills: { dailyNote: 'Os itens destacados são os que uso no dia a dia.' },
   contact: { intro: 'Aberto a conversas sobre QA, automação de testes e processos de qualidade.', cta: 'Enviar e-mail', location: 'Localização', formTitle: 'Envie uma mensagem', name: 'Nome', email: 'Seu e-mail', message: 'Mensagem', send: 'Enviar mensagem', direct: 'Ou fale comigo direto' },
-  footer: { builtBy: 'Projetado e desenvolvido por Thiago Rocha, Analista de QA Sênior', pipeline: 'Pipeline de CI/CD', testReport: 'Relatório de testes', rights: 'Todos os direitos reservados.', backToTop: 'Voltar ao topo', quality: 'Qualidade' },
+  footer: { pipeline: 'Pipeline de CI/CD', testReport: 'Relatório de testes', backToTop: 'Voltar ao topo' },
 };

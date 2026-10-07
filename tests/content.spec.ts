@@ -6,8 +6,9 @@ for (const lang of langs) {
     expect(await page.locator('body').innerText()).not.toMatch(/\bTODO\b/);
   });
 
-  test(`no photo or avatar images (${lang})`, async ({ page }) => {
+  test(`only the logo image, no photo or avatar (${lang})`, async ({ page }) => {
     await page.goto(paths[lang]);
-    await expect(page.locator('img')).toHaveCount(0);
+    const sources = await page.locator('img').evaluateAll((imgs) => imgs.map((i) => i.getAttribute('src')));
+    expect(sources.every((src) => src === '/logo.svg')).toBe(true);
   });
 }

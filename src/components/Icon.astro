@@ -1,5 +1,5 @@
 ---
-interface Props { name: 'linkedin' | 'github' | 'mail' | 'download' | 'pin' | 'arrow' | 'link' | 'arrow-up' | 'sun' }
+interface Props { name: 'linkedin' | 'github' | 'mail' | 'download' | 'pin' | 'arrow' | 'link' | 'arrow-up' | 'sun' | 'graduation' | 'award' | 'book' }
 const { name } = Astro.props;
 ---
 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -12,4 +12,7 @@ const { name } = Astro.props;
   {name === 'arrow-up' && <><path d="M12 19V5" /><path d="m5 12 7-7 7 7" /></>}
   {name === 'link' && <><path d="M10 13a5 5 0 0 0 7.500.500l3-3a5 5 0 0 0-7-7l-1.700 1.700" /><path d="M14 11a5 5 0 0 0-7.500-.500l-3 3a5 5 0 0 0 7 7l1.700-1.700" /></>}
   {name === 'sun' && <><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.900 4.900l1.400 1.400M17.700 17.700l1.400 1.400M2 12h2M20 12h2M4.900 19.100l1.400-1.400M17.700 6.300l1.400-1.400" /></>}
+  {name === 'graduation' && <><path d="M21.42 10.92a1 1 0 0 0-.02-1.84L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0z" /><path d="M22 10v6" /><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" /></>}
+  {name === 'award' && <><circle cx="12" cy="8" r="6" /><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11" /></>}
+  {name === 'book' && <><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></>}
 </svg>

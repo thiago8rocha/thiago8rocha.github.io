@@ -15,7 +15,7 @@ export const ui: Ui = {
     experience: { label: 'Experience', heading: 'Where I have worked on quality' },
     projects: { label: 'Projects', heading: 'Work I can talk about', intro: 'Professional and personal projects, from automotive and e-commerce to open source test suites.' },
     skills: { label: 'Skills', heading: 'My testing toolkit', intro: 'Highlighted items are what I use day to day.' },
-    education: { label: 'Education', heading: 'Education and certifications' },
+    education: { label: 'Education', heading: 'Education and certification' },
     contact: { label: 'Contact', heading: "Let's talk about quality", intro: 'Open to conversations about QA, test automation and quality processes.' },
   },
   hero: { greeting: "Hi, I'm", viewProjects: 'See my work', downloadResume: 'Download resume (PDF)', terminalTitle: 'terminal', passed: 'passed' },
@@ -24,5 +24,5 @@ export const ui: Ui = {
   projects: { featured: 'Featured', filterAll: 'All', filterLabel: 'Filter projects', filterProfessional: 'Professional', filterPersonal: 'Personal', role: 'My role', testTypes: 'Testing', tools: 'Tools', architecture: 'Framework architecture' },
   skills: { dailyNote: 'Highlighted items are what I use day to day.' },
   contact: { intro: 'Open to conversations about QA, test automation and quality processes.', cta: 'Send an email', location: 'Location', formTitle: 'Send a message', name: 'Name', email: 'Your email', message: 'Message', send: 'Send message', direct: 'Or reach me directly' },
-  footer: { builtBy: 'Designed and built by Thiago Rocha, Senior QA Analyst', pipeline: 'CI/CD pipeline', testReport: 'Test report', rights: 'All rights reserved.', backToTop: 'Back to top', quality: 'Quality' },
+  footer: { pipeline: 'CI/CD pipeline', testReport: 'Test report', backToTop: 'Back to top' },
 };

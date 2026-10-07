@@ -67,11 +67,14 @@ export interface SkillGroup {
   items: { name: string; daily?: boolean }[];
 }
 
-export interface Education {
-  degrees: { title: string; place: string; year: string }[];
-  certifications: { title: string; year?: string }[];
-  languages: { name: string; level: string }[];
+export interface EducationItem {
+  icon: 'course' | 'cert' | 'degree';
+  title: string;
+  place: string;
+  meta: string;
 }
+
+export type Education = EducationItem[];
 
 export type SectionKey = 'about' | 'process' | 'experience' | 'projects' | 'skills' | 'education' | 'contact';
 
@@ -91,5 +94,5 @@ export interface Ui {
   projects: { featured: string; filterAll: string; filterLabel: string; filterProfessional: string; filterPersonal: string; role: string; testTypes: string; tools: string; architecture: string };
   skills: { dailyNote: string };
   contact: { intro: string; cta: string; location: string; formTitle: string; name: string; email: string; message: string; send: string; direct: string };
-  footer: { builtBy: string; pipeline: string; testReport: string; rights: string; backToTop: string; quality: string };
+  footer: { pipeline: string; testReport: string; backToTop: string };
 }
