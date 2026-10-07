@@ -1,6 +1,7 @@
 ---
 import type { Lang } from '../data/types';
 import { getContent } from '../data';
+import Icon from './Icon.astro';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -8,26 +9,32 @@ const { profile, ui } = getContent(lang);
 const t = profile.terminal;
 ---
 <section class="hero" id="top">
-  <div class="container grid">
-    <div>
-      <h1>{profile.name}</h1>
-      <p class="title">{profile.title}</p>
-      <p class="tagline">{profile.tagline}</p>
-      <div class="actions">
-        <a class="btn" href={profile.resumeFile} download>{ui.hero.downloadResume}</a>
-        <a class="btn secondary" href="#projects">{ui.hero.viewProjects}</a>
+  <div class="container">
+    <div class="grid">
+      <div>
+        <p class="hello">{ui.hero.greeting}</p>
+        <h1>{profile.name}</h1>
+        <p class="title">{profile.title}</p>
+        <p class="tagline">{profile.tagline}</p>
+        <div class="actions">
+          <a class="btn" href="#projects">{ui.hero.viewProjects}<Icon name="arrow" /></a>
+          <a class="btn ghost" href={profile.resumeFile} download><Icon name="download" />{ui.hero.downloadResume}</a>
+        </div>
+        <ul class="social">
+          <li><a class="icon-btn" href={profile.linkedin} rel="noopener" aria-label="LinkedIn"><Icon name="linkedin" /></a></li>
+          <li><a class="icon-btn" href={profile.github} rel="noopener" aria-label="GitHub"><Icon name="github" /></a></li>
+          <li><a class="icon-btn" href={`mailto:${profile.email}`} aria-label={`Email ${profile.email}`}><Icon name="mail" /></a></li>
+          {profile.location && <li class="pin"><Icon name="pin" />{profile.location}</li>}
+        </ul>
       </div>
-      <ul class="links">
-        <li><a href={profile.linkedin} rel="noopener">LinkedIn</a></li>
-        <li><a href={profile.github} rel="noopener">GitHub</a></li>
-        <li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
-      </ul>
+      <div class="terminal" role="img" aria-label={`${t.command}: ${t.lines.join('; ')}`}>
+        <div class="tbar" aria-hidden="true"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>{ui.hero.terminalTitle}</span></div>
+        <pre aria-hidden="true"><span class="cmd">$ {t.command}</span>
+{t.lines.map((l) => <><span class="ok">✓</span> {l}{'\n'}</>)}<span class="sum">{t.lines.length} {ui.hero.passed} · {t.summary}</span></pre>
+      </div>
     </div>
-    <div class="terminal" role="img" aria-label={`${t.command}: ${t.lines.map((l) => `${l.label} ${l.value}`).join('; ')}`}>
-      <div class="tbar" aria-hidden="true"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-      <pre aria-hidden="true"><span class="cmd">$ {t.command}</span>
-{t.lines.map((l) => <><span class="ok">✓</span> {l.label}: <strong>{l.value}</strong>{'\n'}</>)}
-<span class="muted">{'\n'}{t.lines.length} passed · {t.summary}</span></pre>
-    </div>
+    <ul class="stats" aria-label="Highlights">
+      {profile.stats.map((s) => <li><span class="num">{s.value}{s.unit && <small>{s.unit}</small>}</span><span class="lab">{s.label}</span></li>)}
+    </ul>
   </div>
 </section>

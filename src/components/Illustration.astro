@@ -1,0 +1,29 @@
+---
+interface Props { label: string }
+const { label } = Astro.props;
+---
+<svg viewBox="0 0 400 320" role="img" aria-label={label} xmlns="http://www.w3.org/2000/svg">
+  <rect x="70" y="30" width="190" height="250" rx="14" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="2" />
+  <rect x="130" y="18" width="70" height="26" rx="8" fill="var(--accent)" />
+  <g fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m96 90 8 8 14-16" stroke="var(--accent)" />
+    <path d="m96 140 8 8 14-16" stroke="var(--accent)" />
+    <path d="m96 190 8 8 14-16" stroke="var(--accent)" />
+    <path d="M100 236h18" stroke="var(--warn)" />
+  </g>
+  <g fill="var(--border-strong)">
+    <rect x="132" y="86" width="98" height="8" rx="4" />
+    <rect x="132" y="136" width="78" height="8" rx="4" />
+    <rect x="132" y="186" width="92" height="8" rx="4" />
+    <rect x="132" y="232" width="60" height="8" rx="4" />
+  </g>
+  <circle cx="278" cy="196" r="52" fill="var(--surface)" fill-opacity="0.85" stroke="var(--accent)" stroke-width="7" />
+  <path d="m316 234 40 40" stroke="var(--accent)" stroke-width="12" stroke-linecap="round" />
+  <g fill="none" stroke="var(--warn)" stroke-width="4" stroke-linecap="round">
+    <ellipse cx="278" cy="198" rx="14" ry="19" fill="var(--warn-soft)" />
+    <path d="M264 186l-12-8M292 186l12-8M262 200h-14M294 200h14M265 214l-11 8M291 214l11 8M278 179v-9" />
+  </g>
+  <g fill="var(--accent)" opacity="0.5">
+    <circle cx="330" cy="70" r="6" /><circle cx="354" cy="100" r="4" /><circle cx="48" cy="250" r="5" />
+  </g>
+</svg>

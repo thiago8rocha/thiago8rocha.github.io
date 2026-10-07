@@ -1,102 +1,141 @@
 ---
 import type { Lang } from '../data/types';
 import { getContent } from '../data';
+import SectionHead from './SectionHead.astro';
+import Illustration from './Illustration.astro';
+import Icon from './Icon.astro';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const c = getContent(lang);
-const { ui } = c;
-const kinds = [...new Set(c.projects.flatMap((p) => p.kind))];
+const { ui, featured } = c;
+const S = ui.sections;
 ---
-<section class="block" id="about" aria-labelledby="about-h">
+<section class="section" id="about" aria-labelledby="about-h">
   <div class="container">
-    <div class="section-head"><h2 id="about-h">{ui.sections.about}</h2></div>
-    <div class="two-col">
-      <div>{c.about.paragraphs.map((p) => <p>{p}</p>)}</div>
-      <div class="card now">
-        <h3>{ui.about.currently}</h3>
-        <ul>{c.about.currently.map((i) => <li>{i}</li>)}</ul>
+    <SectionHead id="about-h" no="01" label={S.about.label} heading={S.about.heading} />
+    <div class="about-grid">
+      <div>
+        <p class="main-p">{c.about.paragraphs[0]}</p>
+        {c.about.paragraphs.slice(1).map((p) => <p>{p}</p>)}
+        <div class="now">
+          <h3>{ui.about.currently}</h3>
+          <ul>{c.about.currently.map((i) => <li>{i}</li>)}</ul>
+        </div>
       </div>
+      <div class="illustration"><Illustration label={ui.about.illustrationLabel} /></div>
     </div>
-    <h3 class="eyebrow" style="margin-top:1.5rem">{ui.about.domains}</h3>
-    <ul class="chips">{c.about.domains.map((d) => <li class="chip">{d}</li>)}</ul>
+    <h3 class="domains-label">{ui.about.domains}</h3>
+    <ul class="chips">{c.about.domains.map((d) => <li class="chip accent">{d}</li>)}</ul>
     <div class="highlights">
-      {c.about.highlights.map((h) => <div class="card"><h3>{h.title}</h3><p>{h.text}</p></div>)}
+      {c.about.highlights.map((h) => <div class="card lift"><h3>{h.title}</h3><p>{h.text}</p></div>)}
     </div>
   </div>
 </section>
 
-<section class="block" id="process" aria-labelledby="process-h">
+<section class="section alt" id="process" aria-labelledby="process-h">
   <div class="container">
-    <div class="section-head"><h2 id="process-h">{ui.sections.process}</h2></div>
+    <SectionHead id="process-h" no="02" label={S.process.label} heading={S.process.heading} intro={S.process.intro} />
     <ol class="steps">
-      {c.process.map((s) => (
-        <li class="card">
-          <h3>{s.title}</h3>
-          <p>{s.text}</p>
-          <ul>{s.deliverables.map((d) => <li>{d}</li>)}</ul>
+      {c.process.map((s, i) => (
+        <li class="step">
+          <div class="head" aria-hidden="true"><span class="no">{String(i + 1).padStart(2, '0')}</span><span class="line"></span></div>
+          <div class="card lift">
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+            <ul class="chips">{s.deliverables.map((d) => <li class="chip mono">{d}</li>)}</ul>
+          </div>
         </li>
       ))}
     </ol>
   </div>
 </section>
 
-<section class="block" id="experience" aria-labelledby="experience-h">
+<section class="section" id="experience" aria-labelledby="experience-h">
   <div class="container">
-    <div class="section-head"><h2 id="experience-h">{ui.sections.experience}</h2></div>
+    <SectionHead id="experience-h" no="03" label={S.experience.label} heading={S.experience.heading} />
     <ol class="timeline">
-      {c.experience.map((job, i) => (
-        <li class="job card">
-          <h3>{job.company}</h3>
-          <div class="place">{job.place}</div>
-          {job.roles.map((r) => <div class="role"><span>{r.title}</span><span class="period">{r.period}</span></div>)}
-          <p style="margin-top:0.5rem">{job.summary}</p>
-          <ul>{job.bullets.map((b) => <li>{b}</li>)}</ul>
-          {job.extraBullets.length > 0 && (
-            <>
-              <ul class="more" id={`more-${i}`} hidden>{job.extraBullets.map((b) => <li>{b}</li>)}</ul>
-              <button class="link-btn" type="button" data-more-toggle data-target={`more-${i}`} data-more={ui.experience.showMore} data-less={ui.experience.showLess} aria-expanded="false" aria-controls={`more-${i}`}>{ui.experience.showMore}</button>
-            </>
-          )}
-        </li>
-      ))}
+      {c.experience.map((job, i) => {
+        const first = job.roles[0];
+        const last = job.roles[job.roles.length - 1];
+        const range = job.roles.length > 1 ? `${last.period.split(' – ')[0]} – ${first.period.split(' – ')[1]}` : first.period;
+        return (
+          <li class:list={['job', { current: job.current }]}>
+            <div class="when"><span>{range}</span>{job.current && <span class="badge">{ui.experience.current}</span>}</div>
+            <div class="card">
+              <h3>{first.title}</h3>
+              <div class="company">{job.company}</div>
+              <div class="place">{job.place}</div>
+              {job.roles.length > 1 && job.roles.map((r) => <div class="role-line"><span>{r.title}</span><span class="period">{r.period}</span></div>)}
+              <p class="summary">{job.summary}</p>
+              <ul class="dash">{job.bullets.map((b) => <li>{b}</li>)}</ul>
+              {job.extraBullets.length > 0 && (
+                <>
+                  <ul class="dash more" id={`more-${i}`} hidden>{job.extraBullets.map((b) => <li>{b}</li>)}</ul>
+                  <button class="dashed-btn" type="button" data-more-toggle data-target={`more-${i}`} data-more={ui.experience.showMore.replace('{n}', String(job.extraBullets.length))} data-less={ui.experience.showLess} aria-expanded="false" aria-controls={`more-${i}`}>{ui.experience.showMore.replace('{n}', String(job.extraBullets.length))}</button>
+                </>
+              )}
+              <ul class="chips">{job.tags.map((t) => <li class="chip">{t}</li>)}</ul>
+            </div>
+          </li>
+        );
+      })}
     </ol>
   </div>
 </section>
 
-<section class="block" id="projects" aria-labelledby="projects-h">
+<section class="section alt" id="projects" aria-labelledby="projects-h">
   <div class="container">
-    <div class="section-head"><h2 id="projects-h">{ui.sections.projects}</h2></div>
+    <SectionHead id="projects-h" no="04" label={S.projects.label} heading={S.projects.heading} intro={S.projects.intro} />
     <article class="card feature" aria-labelledby="feat-h">
-      <p class="eyebrow">{ui.projects.featured}</p>
-      <h3 id="feat-h">{c.featured.title}</h3>
-      <p>{c.featured.summary}</p>
-      <ol class="arch" aria-label="Architecture layers">
-        {c.featured.layers.map((l) => <li><strong>{l.name}</strong><span>{l.detail}</span></li>)}
-      </ol>
-      <p><strong>{ui.projects.role}:</strong> {c.featured.role}</p>
-      <ul class="chips">{[...c.featured.testTypes, ...c.featured.tools].map((t) => <li class="chip">{t}</li>)}</ul>
-      <p class="note" style="margin-top:1rem">{c.featured.confidentialityNote}</p>
+      <div class="cols">
+        <div>
+          <div class="badges"><span class="badge">{featured.badge}</span><span class="domain">{featured.domain}</span></div>
+          <h3 id="feat-h">{featured.title}</h3>
+          <p class="client">{featured.client}</p>
+          <p>{featured.summary}</p>
+          <div class="rolebox"><strong>{ui.projects.role}:</strong> {featured.role}</div>
+          <div class="metrics">
+            {featured.metrics.map((m) => <div class="metric"><b>{m.value}</b><span>{m.label}</span></div>)}
+          </div>
+          <ul class="chips">{featured.tools.map((t) => <li class="chip accent">{t}</li>)}</ul>
+        </div>
+        <div class="arch">
+          <h4>{ui.projects.architecture}</h4>
+          <ol>
+            {featured.layers.map((l) => <li><strong>{l.name}</strong><span>{l.detail}</span></li>)}
+          </ol>
+          <p class="note">{featured.layersNote}</p>
+        </div>
+      </div>
+      <p class="note">{featured.confidentialityNote}</p>
     </article>
 
-    <h3>{ui.projects.others}</h3>
     <div class="filters" role="group" aria-label={ui.projects.filterLabel}>
       <button type="button" data-filter="all" aria-pressed="true">{ui.projects.filterAll}</button>
-      {kinds.map((k) => <button type="button" data-filter={k} aria-pressed="false">{k}</button>)}
+      <button type="button" data-filter="professional" aria-pressed="false">{ui.projects.filterProfessional}</button>
+      <button type="button" data-filter="personal" aria-pressed="false">{ui.projects.filterPersonal}</button>
     </div>
     <ul class="grid-cards">
       {c.projects.map((p) => (
-        <li data-kinds={p.kind.join('|')}>
-          <article class="card pcard">
+        <li data-group={p.group}>
+          <article class="card pcard lift">
+            <div class="badges"><span class:list={['badge', { warn: p.group === 'personal' }]}>{p.badge}</span><span class="domain">{p.domain}</span></div>
             <h3>{p.title}</h3>
-            <p class="muted-note">{p.kind.join(' · ')}</p>
+            <p class="client">{p.client}</p>
             <p>{p.summary}</p>
-            <dl>
-              <dt>{ui.projects.role}</dt><dd>{p.role}</dd>
-              <dt>{ui.projects.testTypes}</dt><dd>{p.testTypes.join(', ')}</dd>
-              <dt>{ui.projects.tools}</dt><dd>{p.tools.join(', ')}</dd>
-            </dl>
-            {p.link && <p style="margin-top:0.75rem"><a href={p.link.href} rel="noopener">{p.link.label}<span class="sr-only"> ({p.title})</span></a></p>}
+            <div class="rolebox"><strong>{ui.projects.role}:</strong> {p.role}</div>
+            <div class="meta">
+              <p class="label">{ui.projects.testTypes}</p>
+              <ul class="chips">{p.testTypes.map((t) => <li class="chip">{t}</li>)}</ul>
+              <p class="label">{ui.projects.tools}</p>
+              <p class="tools">{p.tools.join(' · ')}</p>
+            </div>
+            {p.links && (
+              <div class="links">
+                {p.links.map((l) => <a class="btn ghost sm" href={l.href} rel="noopener"><Icon name="github" />{l.label}<span class="sr-only"> ({p.title})</span></a>)}
+              </div>
+            )}
           </article>
         </li>
       ))}
@@ -104,9 +143,9 @@ const kinds = [...new Set(c.projects.flatMap((p) => p.kind))];
   </div>
 </section>
 
-<section class="block" id="skills" aria-labelledby="skills-h">
+<section class="section" id="skills" aria-labelledby="skills-h">
   <div class="container">
-    <div class="section-head"><h2 id="skills-h">{ui.sections.skills}</h2><p class="muted-note">{ui.skills.dailyNote}</p></div>
+    <SectionHead id="skills-h" no="05" label={S.skills.label} heading={S.skills.heading} intro={S.skills.intro} />
     <div class="skill-groups">
       {c.skills.map((g) => (
         <div class="card">
@@ -118,29 +157,38 @@ const kinds = [...new Set(c.projects.flatMap((p) => p.kind))];
   </div>
 </section>
 
-<section class="block" id="education" aria-labelledby="edu-h">
+<section class="section alt" id="education" aria-labelledby="edu-h">
   <div class="container">
-    <div class="section-head"><h2 id="edu-h">{ui.sections.education}</h2></div>
+    <SectionHead id="edu-h" no="06" label={S.education.label} heading={S.education.heading} />
     <div class="edu">
-      <div class="card"><ul>{c.education.degrees.map((d) => <li><strong>{d.title}</strong><br />{d.place}, {d.year}</li>)}</ul></div>
+      <div class="card"><ul>{c.education.degrees.map((d) => <li><strong>{d.title}</strong><small>{d.place}, {d.year}</small></li>)}</ul></div>
       <div class="card"><ul>{c.education.certifications.map((d) => <li>{d.title}{d.year ? ` (${d.year})` : ''}</li>)}</ul></div>
-      <div class="card"><ul>{c.education.languages.map((d) => <li>{d.name}: {d.level}</li>)}</ul></div>
+      <div class="card"><ul>{c.education.languages.map((d) => <li><strong>{d.name}</strong><small>{d.level}</small></li>)}</ul></div>
     </div>
   </div>
 </section>
 
-<section class="block contact" id="contact" aria-labelledby="contact-h">
+<section class="section" id="contact" aria-labelledby="contact-h">
   <div class="container">
-    <h2 id="contact-h">{ui.sections.contact}</h2>
-    <p>{ui.contact.intro}</p>
-    <p><a class="btn" href={`mailto:${c.profile.email}`}>{ui.contact.cta}</a></p>
-    <ul class="links" style="justify-content:center">
-      <li><a href={c.profile.linkedin} rel="noopener">LinkedIn</a></li>
-      <li><a href={c.profile.github} rel="noopener">GitHub</a></li>
-    </ul>
+    <div class="contact-grid">
+      <div>
+        <SectionHead id="contact-h" no="07" label={S.contact.label} heading={S.contact.heading} intro={S.contact.intro} />
+        <p class="eyebrow" aria-hidden="true"><b>{ui.contact.direct}</b></p>
+        <ul class="contact-list">
+          <li><Icon name="mail" /><a href={`mailto:${c.profile.email}`}>{c.profile.email}</a></li>
+          {c.profile.location && <li><Icon name="pin" />{c.profile.location}</li>}
+          <li><Icon name="linkedin" /><a href={c.profile.linkedin} rel="noopener">LinkedIn</a></li>
+          <li><Icon name="github" /><a href={c.profile.github} rel="noopener">GitHub</a></li>
+        </ul>
+        <a class="btn ghost" href={c.profile.resumeFile} download><Icon name="download" />{ui.hero.downloadResume}</a>
+      </div>
+      <form class="card contact-form" action={`mailto:${c.profile.email}`} method="post" enctype="text/plain" aria-labelledby="form-h">
+        <h3 id="form-h">{ui.contact.formTitle}</h3>
+        <div class="field"><label for="f-name">{ui.contact.name}</label><input id="f-name" name="name" type="text" autocomplete="name" required /></div>
+        <div class="field"><label for="f-email">{ui.contact.email}</label><input id="f-email" name="email" type="email" autocomplete="email" required /></div>
+        <div class="field"><label for="f-msg">{ui.contact.message}</label><textarea id="f-msg" name="message" required></textarea></div>
+        <button class="btn" type="submit"><Icon name="mail" />{ui.contact.send}</button>
+      </form>
+    </div>
   </div>
 </section>
-
-<style is:global>
-  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-</style>

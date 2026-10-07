@@ -6,6 +6,6 @@ for (const lang of langs) {
     const hero = page.locator('.hero');
     await expect(hero.getByRole('link', { name: 'LinkedIn' })).toHaveAttribute('href', 'https://www.linkedin.com/in/thiago8rocha');
     await expect(hero.getByRole('link', { name: 'GitHub' })).toHaveAttribute('href', 'https://github.com/thiago8rocha');
-    await expect(hero.getByRole('link', { name: 'thiago8rocha@gmail.com' })).toHaveAttribute('href', 'mailto:thiago8rocha@gmail.com');
+    await expect(hero.getByRole('link', { name: 'Email thiago8rocha@gmail.com' })).toHaveAttribute('href', 'mailto:thiago8rocha@gmail.com');
   });
 }

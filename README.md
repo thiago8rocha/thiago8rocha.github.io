@@ -16,7 +16,7 @@ The site is itself a portfolio item: it ships with a Playwright + axe suite and 
 src/
   data/{en,pt}/   all site content, one typed file per section
   data/types.ts   the shape every content file must follow
-  components/     Header, Hero, Sections, Footer (no hard-coded text)
+  components/     Header, Hero, Sections, Footer, Icon, Illustration (no hard-coded text)
   layouts/Base.astro   head, SEO, JSON-LD, theme init, client scripts
   pages/          index.astro (en) and pt/index.astro
 public/resume/    resume PDFs, robots.txt, favicon
@@ -45,6 +45,7 @@ Selectors use roles and labels only. Each spec runs in two Playwright projects, 
 | Spec | Covers | Why |
 | --- | --- | --- |
 | `routes` | Home in each language, `sitemap`, `robots.txt` return 200 | Catches broken builds and SEO files |
+| `contact` | Contact form is labelled and submits through `mailto:`, hero numbers render | Contact must work without any external service |
 | `navigation` | Menu anchors, "show more", project filters, language and theme switch | The only interactive behavior on the site |
 | `resume` | Resume button points to a real PDF | The main call to action must not break |
 | `links` | LinkedIn, GitHub and `mailto:` destinations | A wrong contact link defeats the site |

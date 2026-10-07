@@ -83,11 +83,23 @@ const jsonLd = {
       filterBtns.forEach((btn) => btn.addEventListener('click', () => {
         filterBtns.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
         const f = btn.dataset.filter;
-        document.querySelectorAll<HTMLElement>('[data-kinds]').forEach((card) => {
-          const kinds = (card.dataset.kinds ?? '').split('|');
-          card.hidden = f !== 'all' && !kinds.includes(f ?? '');
+        document.querySelectorAll<HTMLElement>('[data-group]').forEach((card) => {
+          card.hidden = f !== 'all' && card.dataset.group !== f;
         });
       }));
+
+      const spyLinks = [...document.querySelectorAll<HTMLAnchorElement>('[data-spy]')];
+      if ('IntersectionObserver' in window && spyLinks.length) {
+        const map = new Map(spyLinks.map((a) => [a.dataset.spy!, a]));
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            spyLinks.forEach((a) => a.removeAttribute('aria-current'));
+            map.get(e.target.id)?.setAttribute('aria-current', 'true');
+          });
+        }, { rootMargin: '-40% 0px -55% 0px' });
+        map.forEach((_, id) => { const s = document.getElementById(id); if (s) io.observe(s); });
+      }
     </script>
   </body>
 </html>
