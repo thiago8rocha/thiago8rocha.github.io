@@ -15,6 +15,6 @@ export const about: About = {
     { title: 'ISTQB CTFL', text: 'Certified Tester, Foundation Level.' },
     { title: 'Arquitetura de automação', text: 'Frameworks Playwright e Robot Framework criados do zero.' },
     { title: 'Acessibilidade', text: 'Testes ADA e WCAG 2.1 com Axe e Lighthouse.' },
-    // TODO: confirm a card about AI in the testing cycle (test writing, log analysis, few-shot test case generation).
+    { title: 'IA em testes', text: 'Escrita de testes, análise de logs e geração de casos de teste com few-shot.' },
   ],
 };

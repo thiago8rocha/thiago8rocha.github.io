@@ -4,21 +4,26 @@ export const profile: Profile = {
   name: 'Thiago Oliveira Rocha',
   title: 'Senior QA Analyst',
   tagline: 'I build test automation architectures and quality processes that teams can trust, from API to visual UI.',
-  // TODO: confirm the public location to show in the footer/contact (resumes only list company cities).
+  // TODO: confirm the public location (resumes only list company cities). Empty hides it everywhere.
   location: '',
   email: 'thiago8rocha@gmail.com',
   linkedin: 'https://www.linkedin.com/in/thiago8rocha',
   github: 'https://github.com/thiago8rocha',
   resumeFile: '/resume/Thiago-Rocha-Resume-EN.pdf',
   terminal: {
-    command: 'npx playwright test --project=career',
+    command: 'npx playwright test --project=thiago',
     lines: [
-      { label: 'Years in software quality', value: '9+' },
-      { label: 'ISTQB CTFL certified', value: 'yes' },
-      { label: 'Automation architectures built from scratch', value: 'Robot Framework, Playwright' },
-      { label: 'Automation layers covered', value: 'API, BFF, Frontend, Visual' },
-      { label: 'Markets served', value: 'US, Canada, Brazil' },
+      '9+ years in software quality',
+      'ISTQB CTFL certified',
+      'Automation built from scratch: Playwright, Robot Framework',
+      'Layers covered: API · BFF · Frontend · Visual',
+      'Products for the US, Canada and Brazil',
     ],
     summary: 'all checks passed',
   },
+  stats: [
+    { value: '9+', unit: 'yrs', label: 'QA and test automation experience' },
+    { value: '5', label: 'Companies, from mobile devices to automotive data' },
+    { value: '4', label: 'Automation layers: API, BFF, Frontend, Visual' },
+  ],
 };

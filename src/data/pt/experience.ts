@@ -12,6 +12,8 @@ export const experience: Job[] = [
       'Desenvolvi a trigger e o pipeline de execução dos testes automatizados no Jenkins, com shared libraries e notificações no Google Chat.',
     ],
     extraBullets: ['Atuei na definição do Xray como ferramenta de gerenciamento de testes do time, com participação prevista na implantação.'],
+    tags: ['Playwright', 'Playwright BDD', 'TypeScript', 'Jenkins', 'Xray', 'Google Chat'],
+    current: true,
   },
   {
     company: 'Zallpy',
@@ -27,6 +29,7 @@ export const experience: Job[] = [
       'Análise de risco e impacto de funcionalidades críticas para apoiar a priorização de correções e releases.',
       'Participação ativa em cerimônias de handoff e refinamento com devs e POs, reduzindo retrabalho.',
     ],
+    tags: ['Xray', 'BrowserStack', 'Axe Expert', 'Lighthouse'],
   },
   {
     company: 'Wake Experience',
@@ -41,6 +44,7 @@ export const experience: Job[] = [
       'Criei documentação que melhorou a consistência dos testes e a integração de novos QAs.',
       'Criei massa de dados via frontend e scripts de banco para cenários complexos.',
     ],
+    tags: ['Robot Framework', 'Postman', 'Swagger'],
   },
   {
     company: 'Softplan',
@@ -55,6 +59,7 @@ export const experience: Job[] = [
       'Promovido de Analista I para II em abril de 2021 por desempenho consistente e contribuições técnicas.',
     ],
     extraBullets: ['Reportei e ajudei a priorizar defeitos no RTC (Rational Team Concert).', 'Propus melhorias de processo e de funcionalidades que foram implementadas nos produtos.'],
+    tags: ['SQL Server', 'DB2', 'Oracle', 'RTC'],
   },
   {
     company: 'BRISA',
@@ -69,5 +74,6 @@ export const experience: Job[] = [
       'Promovido a Team Leader após 18 meses, coordenando o time de QA em vários subprojetos de curta duração.',
     ],
     extraBullets: ['Documentei defeitos críticos no HP Quality Center.'],
+    tags: ['HP Quality Center'],
   },
 ];
