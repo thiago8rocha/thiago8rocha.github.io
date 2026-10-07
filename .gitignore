@@ -4,3 +4,18 @@ dist/
 playwright-report/
 test-results/
 .env
+
+# Local-only working files
+PORTFOLIO_BRIEF.md
+*_BRIEF.md
+graphify-out/
+.claude/
+CLAUDE.md
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+.env.*
