@@ -63,10 +63,19 @@ const S = ui.sections;
           <li class:list={['job', { current: job.current }]}>
             <div class="when"><span>{range}</span>{job.current && <span class="badge">{ui.experience.current}</span>}</div>
             <div class="card">
-              <h3>{first.title}</h3>
-              <div class="company">{job.company}</div>
-              <div class="place">{job.place}</div>
-              {job.roles.length > 1 && job.roles.map((r) => <div class="role-line"><span>{r.title}</span><span class="period">{r.period}</span></div>)}
+              {job.roles.length > 1 ? (
+                <>
+                  <h3>{job.company}</h3>
+                  <div class="place">{job.place}</div>
+                  {job.roles.map((r) => <div class="role-line"><span class="company">{r.title}</span><span class="period">{r.period}</span></div>)}
+                </>
+              ) : (
+                <>
+                  <h3>{first.title}</h3>
+                  <div class="company">{job.company}</div>
+                  <div class="place">{job.place}</div>
+                </>
+              )}
               <p class="summary">{job.summary}</p>
               <ul class="dash">{job.bullets.map((b) => <li>{b}</li>)}</ul>
               {job.extraBullets.length > 0 && (
