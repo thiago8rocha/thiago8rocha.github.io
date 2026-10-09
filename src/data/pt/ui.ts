@@ -21,7 +21,12 @@ export const ui: Ui = {
   hero: { greeting: 'Olá, eu sou', viewProjects: 'Ver projetos', downloadResume: 'Baixar currículo (PDF)', terminalTitle: 'terminal', passed: 'passaram' },
   about: { currently: 'Atualmente', domains: 'Domínios', illustrationLabel: 'Ilustração de um checklist de testes com lupa e um bug' },
   experience: { showMore: 'Mostrar mais {n}', showLess: 'Mostrar menos', current: 'Atual' },
-  projects: { featured: 'Destaque', filterAll: 'Todos', filterLabel: 'Filtrar projetos', filterProfessional: 'Profissionais', filterPersonal: 'Pessoais', role: 'Meu papel', testTypes: 'Testes', tools: 'Ferramentas', architecture: 'Arquitetura do framework' },
+  projects: { featured: 'Destaque', filterAll: 'Todos', filterLabel: 'Filtrar projetos', filterProfessional: 'Profissionais', filterPersonal: 'Pessoais', role: 'Meu papel', testTypes: 'Testes', tools: 'Ferramentas', architecture: 'Arquitetura do framework', viewCaseStudy: 'Ver estudo de caso' },
+  caseStudy: {
+    back: 'Voltar aos projetos', client: 'Cliente', domain: 'Domínio', overview: 'Visão geral', howItWorks: 'Como funciona', role: 'Meu papel', stack: 'Stack', testing: 'Foco dos testes',
+    architecture: 'Arquitetura do framework', challenges: 'Desafios e solução de problemas', challenge: 'Desafio', approach: 'Abordagem', outcome: 'Resultado', achievements: 'Principais conquistas', next: 'Próximo projeto',
+    placeholder: 'Detalhes em breve.',
+  },
   skills: { dailyNote: 'Os itens destacados são os que uso no dia a dia.' },
   contact: { intro: 'Aberto a conversas sobre QA, automação de testes e processos de qualidade.', cta: 'Enviar e-mail', location: 'Localização', formTitle: 'Envie uma mensagem', name: 'Nome', email: 'Seu e-mail', message: 'Mensagem', send: 'Enviar mensagem', direct: 'Ou fale comigo direto' },
   footer: { pipeline: 'Pipeline de CI/CD', testReport: 'Relatório de testes', backToTop: 'Voltar ao topo' },

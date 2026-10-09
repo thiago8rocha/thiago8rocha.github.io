@@ -21,7 +21,12 @@ export const ui: Ui = {
   hero: { greeting: "Hi, I'm", viewProjects: 'See my work', downloadResume: 'Download resume (PDF)', terminalTitle: 'terminal', passed: 'passed' },
   about: { currently: 'Currently', domains: 'Domains', illustrationLabel: 'Illustration of a test checklist with a magnifying glass and a bug' },
   experience: { showMore: 'Show {n} more', showLess: 'Show less', current: 'Current' },
-  projects: { featured: 'Featured', filterAll: 'All', filterLabel: 'Filter projects', filterProfessional: 'Professional', filterPersonal: 'Personal', role: 'My role', testTypes: 'Testing', tools: 'Tools', architecture: 'Framework architecture' },
+  projects: { featured: 'Featured', filterAll: 'All', filterLabel: 'Filter projects', filterProfessional: 'Professional', filterPersonal: 'Personal', role: 'My role', testTypes: 'Testing', tools: 'Tools', architecture: 'Framework architecture', viewCaseStudy: 'View Case Study' },
+  caseStudy: {
+    back: 'Back to projects', client: 'Client', domain: 'Domain', overview: 'Overview', howItWorks: 'How it works', role: 'My role', stack: 'Tech stack', testing: 'Testing focus',
+    architecture: 'Framework architecture', challenges: 'Challenges and problem-solving', challenge: 'Challenge', approach: 'Approach', outcome: 'Outcome', achievements: 'Key achievements', next: 'Next project',
+    placeholder: 'Details coming soon.',
+  },
   skills: { dailyNote: 'Highlighted items are what I use day to day.' },
   contact: { intro: 'Open to conversations about QA, test automation and quality processes.', cta: 'Send an email', location: 'Location', formTitle: 'Send a message', name: 'Name', email: 'Your email', message: 'Message', send: 'Send message', direct: 'Or reach me directly' },
   footer: { pipeline: 'CI/CD pipeline', testReport: 'Test report', backToTop: 'Back to top' },

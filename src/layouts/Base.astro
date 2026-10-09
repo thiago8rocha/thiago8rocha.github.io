@@ -3,11 +3,13 @@ import '../styles/global.css';
 import type { Lang } from '../data/types';
 import { getContent } from '../data';
 
-interface Props { lang: Lang }
-const { lang } = Astro.props;
+interface Props { lang: Lang; title?: string; description?: string; path?: string }
+const { lang, path = '' } = Astro.props;
 const c = getContent(lang);
 const site = 'https://thiago8rocha.github.io';
-const url = site + (lang === 'en' ? '/' : '/pt/');
+const url = site + (lang === 'en' ? '/' : '/pt/') + path;
+const title = Astro.props.title ?? c.ui.siteTitle;
+const description = Astro.props.description ?? c.ui.metaDescription;
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
@@ -23,16 +25,16 @@ const jsonLd = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{c.ui.siteTitle}</title>
-    <meta name="description" content={c.ui.metaDescription} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
     <link rel="canonical" href={url} />
-    <link rel="alternate" hreflang="en" href={site + '/'} />
-    <link rel="alternate" hreflang="pt-BR" href={site + '/pt/'} />
-    <link rel="alternate" hreflang="x-default" href={site + '/'} />
+    <link rel="alternate" hreflang="en" href={site + '/' + path} />
+    <link rel="alternate" hreflang="pt-BR" href={site + '/pt/' + path} />
+    <link rel="alternate" hreflang="x-default" href={site + '/' + path} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content={c.ui.siteTitle} />
-    <meta property="og:description" content={c.ui.metaDescription} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
     <meta property="og:url" content={url} />
     <meta property="og:image" content={site + '/og.png'} />
     <meta name="twitter:card" content="summary_large_image" />

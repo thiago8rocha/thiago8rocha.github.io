@@ -42,7 +42,15 @@ export interface Link {
   href: string;
 }
 
+export interface CaseStudyContent {
+  overview?: string[];
+  howItWorks?: string[];
+  challenges?: { title: string; challenge: string; approach: string; outcome: string }[];
+  achievements?: string[];
+}
+
 export interface Project {
+  slug: string;
   title: string;
   group: 'professional' | 'personal';
   badge: string;
@@ -53,6 +61,7 @@ export interface Project {
   testTypes: string[];
   tools: string[];
   links?: Link[];
+  caseStudy?: CaseStudyContent;
 }
 
 export interface FeaturedProject extends Project {
@@ -91,7 +100,11 @@ export interface Ui {
   hero: { greeting: string; viewProjects: string; downloadResume: string; terminalTitle: string; passed: string };
   about: { currently: string; domains: string; illustrationLabel: string };
   experience: { showMore: string; showLess: string; current: string };
-  projects: { featured: string; filterAll: string; filterLabel: string; filterProfessional: string; filterPersonal: string; role: string; testTypes: string; tools: string; architecture: string };
+  projects: { featured: string; filterAll: string; filterLabel: string; filterProfessional: string; filterPersonal: string; role: string; testTypes: string; tools: string; architecture: string; viewCaseStudy: string };
+  caseStudy: {
+    back: string; client: string; domain: string; overview: string; howItWorks: string; role: string; stack: string; testing: string;
+    architecture: string; challenges: string; challenge: string; approach: string; outcome: string; achievements: string; next: string; placeholder: string;
+  };
   skills: { dailyNote: string };
   contact: { intro: string; cta: string; location: string; formTitle: string; name: string; email: string; message: string; send: string; direct: string };
   footer: { pipeline: string; testReport: string; backToTop: string };

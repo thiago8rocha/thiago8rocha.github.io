@@ -1,6 +1,6 @@
 ---
 import type { Lang } from '../data/types';
-import { getContent } from '../data';
+import { getContent, allProjects, basePath } from '../data';
 import SectionHead from './SectionHead.astro';
 import Illustration from './Illustration.astro';
 import Icon from './Icon.astro';
@@ -8,7 +8,7 @@ import Icon from './Icon.astro';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const c = getContent(lang);
-const { ui, featured } = c;
+const { ui } = c;
 const S = ui.sections;
 ---
 <section class="section" id="about" aria-labelledby="about-h">
@@ -97,55 +97,23 @@ const S = ui.sections;
 <section class="section" id="projects" aria-labelledby="projects-h">
   <div class="container">
     <SectionHead id="projects-h" no="04" label={S.projects.label} heading={S.projects.heading} intro={S.projects.intro} />
-    <article class="card feature" aria-labelledby="feat-h">
-      <div class="cols">
-        <div>
-          <div class="badges"><span class="badge">{featured.badge}</span><span class="domain">{featured.domain}</span></div>
-          <h3 id="feat-h">{featured.title}</h3>
-          <p class="client">{featured.client}</p>
-          <p>{featured.summary}</p>
-          <div class="rolebox"><strong>{ui.projects.role}:</strong> {featured.role}</div>
-          <div class="metrics">
-            {featured.metrics.map((m) => <div class="metric"><b>{m.value}</b><span>{m.label}</span></div>)}
-          </div>
-          <ul class="chips">{featured.tools.map((t) => <li class="chip accent">{t}</li>)}</ul>
-        </div>
-        <div class="arch">
-          <h4>{ui.projects.architecture}</h4>
-          <ol>
-            {featured.layers.map((l) => <li><strong>{l.name}</strong><span>{l.detail}</span></li>)}
-          </ol>
-          <p class="note">{featured.layersNote}</p>
-        </div>
-      </div>
-      <p class="note">{featured.confidentialityNote}</p>
-    </article>
-
     <div class="filters" role="group" aria-label={ui.projects.filterLabel}>
       <button type="button" data-filter="all" aria-pressed="true">{ui.projects.filterAll}</button>
       <button type="button" data-filter="professional" aria-pressed="false">{ui.projects.filterProfessional}</button>
       <button type="button" data-filter="personal" aria-pressed="false">{ui.projects.filterPersonal}</button>
     </div>
     <ul class="grid-cards">
-      {c.projects.map((p) => (
+      {allProjects(lang).map((p) => (
         <li data-group={p.group}>
           <article class="card pcard lift">
             <div class="badges"><span class:list={['badge', { warn: p.group === 'personal' }]}>{p.badge}</span><span class="domain">{p.domain}</span></div>
             <h3>{p.title}</h3>
             <p class="client">{p.client}</p>
-            <p>{p.summary}</p>
-            <div class="rolebox"><strong>{ui.projects.role}:</strong> {p.role}</div>
-            <div class="meta">
-              <p class="label">{ui.projects.testTypes}</p>
-              <ul class="chips">{p.testTypes.map((t) => <li class="chip">{t}</li>)}</ul>
-              <p class="label">{ui.projects.tools}</p>
-              <p class="tools">{p.tools.join(' · ')}</p>
+            <p class="summary">{p.summary}</p>
+            <ul class="chips">{p.tools.map((t) => <li class="chip">{t}</li>)}</ul>
+            <div class="foot">
+              <a class="btn ghost sm" href={`${basePath(lang)}projects/${p.slug}/`}>{ui.projects.viewCaseStudy}<span class="sr-only">: {p.title}</span><Icon name="arrow" /></a>
             </div>
-            {p.links && (
-              <div class="links">
-                {p.links.map((l) => <a class="btn ghost sm" href={l.href} rel="noopener"><Icon name="github" />{l.label}<span class="sr-only"> ({p.title})</span></a>)}
-              </div>
-            )}
           </article>
         </li>
       ))}

@@ -1,6 +1,7 @@
 import type { FeaturedProject, Project } from '../types';
 
 export const featured: FeaturedProject = {
+  slug: 'playwright-automation-architecture',
   title: 'Arquitetura de automação Playwright, construída do zero',
   group: 'professional',
   badge: 'Destaque',
@@ -28,6 +29,7 @@ export const featured: FeaturedProject = {
 
 export const projects: Project[] = [
   {
+    slug: 'mygarage-bmw',
     title: 'MyGarage, BMW US/CA',
     group: 'professional',
     badge: 'Profissional',
@@ -39,6 +41,7 @@ export const projects: Project[] = [
     tools: ['Xray', 'BrowserStack', 'Axe Expert', 'Lighthouse'],
   },
   {
+    slug: 'wake-experience-automation',
     title: 'Automação Wake Experience',
     group: 'professional',
     badge: 'Profissional',
@@ -50,6 +53,7 @@ export const projects: Project[] = [
     tools: ['Robot Framework', 'Postman', 'Swagger'],
   },
   {
+    slug: 'bookshelf-playwright',
     title: 'Bookshelf, Playwright + TypeScript',
     group: 'personal',
     badge: 'Pessoal',
@@ -62,6 +66,7 @@ export const projects: Project[] = [
     links: [{ label: 'Repositório', href: 'https://github.com/thiago8rocha/bookshelf-playwright-tests' }],
   },
   {
+    slug: 'bookshelf-robot-k6',
     title: 'Bookshelf, Robot Framework + K6',
     group: 'personal',
     badge: 'Pessoal',

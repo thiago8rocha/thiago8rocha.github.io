@@ -1,10 +1,11 @@
 ---
 import type { Lang } from '../data/types';
-import { getContent } from '../data';
+import { getContent, basePath } from '../data';
 import Icon from './Icon.astro';
 
-interface Props { lang: Lang }
-const { lang } = Astro.props;
+interface Props { lang: Lang; sub?: boolean; switchHref?: string }
+const { lang, sub = false, switchHref } = Astro.props;
+const anchor = sub ? basePath(lang) : '';
 const { ui, profile } = getContent(lang);
 const items = [
   ['about', ui.nav.about],
@@ -18,15 +19,15 @@ const items = [
 <a class="skip" href="#main">{ui.skipToContent}</a>
 <header class="site-header">
   <div class="container bar">
-    <a class="brand" href="#top"><img src="/logo.svg" alt="" width="82" height="32" /><span>{profile.name.split(' ')[0]} {profile.name.split(' ').slice(-1)[0]}</span></a>
+    <a class="brand" href={`${anchor}#top`}><img src="/logo.svg" alt="" width="82" height="32" /><span>{profile.name.split(' ')[0]} {profile.name.split(' ').slice(-1)[0]}</span></a>
     <div class="tools">
       <nav class="nav" id="site-nav" aria-label="Primary">
         <ul>
-          {items.map(([id, label]) => <li><a href={`#${id}`} data-spy={id}>{label}</a></li>)}
+          {items.map(([id, label]) => <li><a href={`${anchor}#${id}`} data-spy={id}>{label}</a></li>)}
         </ul>
         <a class="btn sm" href={profile.resumeFile} download><Icon name="download" />{ui.nav.resume}</a>
       </nav>
-      <a class="icon-btn" href={ui.langSwitch.targetHref} hreflang={lang === 'en' ? 'pt-BR' : 'en'} lang={lang === 'en' ? 'pt-BR' : 'en'} aria-label={`${ui.langSwitch.label}: ${ui.langSwitch.targetName}`}>{ui.langSwitch.short}</a>
+      <a class="icon-btn" href={switchHref ?? ui.langSwitch.targetHref} hreflang={lang === 'en' ? 'pt-BR' : 'en'} lang={lang === 'en' ? 'pt-BR' : 'en'} aria-label={`${ui.langSwitch.label}: ${ui.langSwitch.targetName}`}>{ui.langSwitch.short}</a>
       <button class="icon-btn" type="button" data-theme-toggle aria-label={ui.themeToggle} aria-pressed="false"><Icon name="sun" /></button>
       <button class="icon-btn menu-toggle" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false">{ui.menu}</button>
     </div>

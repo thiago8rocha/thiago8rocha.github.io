@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import CaseStudy from '../../components/CaseStudy.astro';
+import Footer from '../../components/Footer.astro';
+import { allProjects, getContent } from '../../data';
+
+export function getStaticPaths() {
+  return allProjects('en').map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const c = getContent('en');
+const project = allProjects('en').find((p) => p.slug === slug)!;
+---
+<Base lang="en" title={`${project.title} | ${c.profile.name}`} description={project.summary} path={`projects/${slug}/`}>
+  <Header lang="en" sub switchHref={`/pt/projects/${slug}/`} />
+  <main id="main">
+    <CaseStudy lang="en" slug={slug!} />
+  </main>
+  <Footer lang="en" sub />
+</Base>
