@@ -4,15 +4,15 @@ import type { Job } from '../types';
 export const experience: Job[] = [
   {
     company: 'CarBigData',
-    place: 'Florianópolis, SC (Remote), through Zallpy',
+    place: 'Florianópolis, SC (Remote)',
     roles: [{ title: 'Senior QA Analyst', period: 'Apr 2026 – Present' }],
     summary: 'National leader in automotive data intelligence, working on fraud prevention and asset recovery through a proprietary data and image collection and analysis pipeline.',
     bullets: [
-      "Defined and implemented the project's test automation architecture from the ground up with Playwright, using the Feature Actions and Playwright BDD patterns, covering API, BFF, Frontend and Visual testing.",
+      "Defined and implemented the project's test automation architecture from the ground up with Playwright, using the Feature Actions and Playwright BDD patterns, covering E2E, API, BFF and UI testing.",
       'Built the automated test trigger and execution pipeline in Jenkins, with shared libraries and Google Chat notifications.',
     ],
-    extraBullets: ["Helped define Xray as the team's test management tool, with planned participation in its rollout."],
-    tags: ['Playwright', 'Playwright BDD', 'TypeScript', 'Jenkins', 'Xray', 'Google Chat'],
+    extraBullets: [],
+    tags: ['Playwright', 'Playwright BDD', 'TypeScript', 'Jenkins', 'Google Chat', 'Claude Code', 'Playwright MCP'],
     current: true,
   },
   {
@@ -37,7 +37,7 @@ export const experience: Job[] = [
     roles: [{ title: 'Quality Analyst II', period: 'Apr 2022 – Sep 2022' }],
     summary: 'E-commerce platform serving thousands of online store owners; allocated to multiple project teams.',
     bullets: [
-      'Designed and implemented an automation architecture with Robot Framework (OO Actions pattern) for multiple teams, covering UI and API and replacing the previous lack of a standard.',
+      'Designed and implemented an automation architecture with Robot Framework (Feature Actions pattern) for multiple teams, covering frontend, API and BFF and replacing the previous lack of a standard.',
       'Led cross-team QA process standardization and validated REST APIs with Postman and Swagger.',
     ],
     extraBullets: [

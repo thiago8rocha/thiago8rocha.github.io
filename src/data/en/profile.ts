@@ -16,7 +16,7 @@ export const profile: Profile = {
       '9+ years in software quality',
       'ISTQB CTFL certified',
       'Automation built from scratch: Playwright, Robot Framework',
-      'Layers covered: API · BFF · Frontend · Visual',
+      'Layers covered: E2E · API · BFF · UI',
       'Products for the US, Canada and Brazil',
     ],
     summary: 'all checks passed',
@@ -24,6 +24,6 @@ export const profile: Profile = {
   stats: [
     { value: '9+', unit: 'yrs', label: 'QA and test automation experience' },
     { value: '5', label: 'Companies, from mobile devices to automotive data' },
-    { value: '4', label: 'Automation layers: API, BFF, Frontend, Visual' },
+    { value: '4', label: 'Automation layers: E2E, API, BFF, UI' },
   ],
 };

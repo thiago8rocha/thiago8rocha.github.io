@@ -100,15 +100,15 @@ const S = ui.sections;
     <div class="filters" role="group" aria-label={ui.projects.filterLabel}>
       <button type="button" data-filter="all" aria-pressed="true">{ui.projects.filterAll}</button>
       <button type="button" data-filter="professional" aria-pressed="false">{ui.projects.filterProfessional}</button>
-      <button type="button" data-filter="personal" aria-pressed="false">{ui.projects.filterPersonal}</button>
+      <button type="button" data-filter="opensource" aria-pressed="false">{ui.projects.filterOpenSource}</button>
     </div>
     <ul class="grid-cards">
       {allProjects(lang).map((p) => (
         <li data-group={p.group}>
           <article class="card pcard lift">
-            <div class="badges"><span class:list={['badge', { warn: p.group === 'personal' }]}>{p.badge}</span><span class="domain">{p.domain}</span></div>
+            <div class="badges"><span class:list={['badge', { warn: p.group === 'opensource' }]}>{p.badge}</span>{p.company && <span class="card-company">{p.company}</span>}</div>
             <h3>{p.title}</h3>
-            <p class="client">{p.client}</p>
+            {p.subtitle && <p class="subtitle">{p.subtitle}</p>}
             <p class="summary">{p.summary}</p>
             <ul class="chips">{p.tools.map((t) => <li class="chip">{t}</li>)}</ul>
             <div class="foot">

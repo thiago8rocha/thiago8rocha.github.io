@@ -10,8 +10,8 @@ test('menu anchors scroll to their sections', async ({ page, isMobile }) => {
 
 test('show more expands and collapses extra experience bullets', async ({ page }) => {
   await page.goto('/');
-  const extra = page.getByText('Helped define Xray as the team');
-  const more = page.getByRole('button', { name: 'Show 1 more' }).first();
+  const extra = page.getByText('Risk and impact analysis of critical features');
+  const more = page.getByRole('button', { name: 'Show 2 more' }).first();
   await expect(more).toHaveAttribute('aria-expanded', 'false');
   await expect(extra).toBeHidden();
   await more.click();
@@ -27,8 +27,8 @@ test('project filters show only matching projects', async ({ page }) => {
   const group = page.getByRole('group', { name: 'Filter projects' });
   const personal = page.getByRole('heading', { name: 'Bookshelf, Playwright + TypeScript' });
   const garage = page.getByRole('heading', { name: 'MyGarage, BMW US/CA' });
-  await group.getByRole('button', { name: 'Personal' }).click();
-  await expect(group.getByRole('button', { name: 'Personal' })).toHaveAttribute('aria-pressed', 'true');
+  await group.getByRole('button', { name: 'Open Source' }).click();
+  await expect(group.getByRole('button', { name: 'Open Source' })).toHaveAttribute('aria-pressed', 'true');
   await expect(personal).toBeVisible();
   await expect(garage).toBeHidden();
   await group.getByRole('button', { name: 'All' }).click();

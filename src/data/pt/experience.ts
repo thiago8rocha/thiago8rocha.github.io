@@ -4,15 +4,15 @@ import type { Job } from '../types';
 export const experience: Job[] = [
   {
     company: 'CarBigData',
-    place: 'Florianópolis, SC (Remoto), via Zallpy',
+    place: 'Florianópolis, SC (Remoto)',
     roles: [{ title: 'Analista de QA Sênior', period: 'Abr 2026 – Atual' }],
     summary: 'Líder nacional em inteligência de dados automotivos, atuando na prevenção a fraudes e recuperação de ativos por meio de um pipeline próprio de coleta e análise de dados e imagens.',
     bullets: [
-      'Defini e implementei do zero a arquitetura de testes automatizados do projeto com Playwright, adotando os padrões Feature Actions e Playwright BDD, com cobertura de API, BFF, Frontend e Visual.',
+      'Defini e implementei do zero a arquitetura de testes automatizados do projeto com Playwright, adotando os padrões Feature Actions e Playwright BDD, com cobertura de E2E, API, BFF e UI.',
       'Desenvolvi a trigger e o pipeline de execução dos testes automatizados no Jenkins, com shared libraries e notificações no Google Chat.',
     ],
-    extraBullets: ['Atuei na definição do Xray como ferramenta de gerenciamento de testes do time, com participação prevista na implantação.'],
-    tags: ['Playwright', 'Playwright BDD', 'TypeScript', 'Jenkins', 'Xray', 'Google Chat'],
+    extraBullets: [],
+    tags: ['Playwright', 'Playwright BDD', 'TypeScript', 'Jenkins', 'Google Chat', 'Claude Code', 'Playwright MCP'],
     current: true,
   },
   {
@@ -37,7 +37,7 @@ export const experience: Job[] = [
     roles: [{ title: 'Analista de Qualidade II', period: 'Abr 2022 – Set 2022' }],
     summary: 'Plataforma de e-commerce que atende milhares de lojistas online; alocado em múltiplos times de projetos.',
     bullets: [
-      'Desenhei e implementei uma arquitetura de automação com Robot Framework (padrão OO Actions) para vários times, cobrindo UI e API e substituindo a falta de padrão anterior.',
+      'Desenhei e implementei uma arquitetura de automação com Robot Framework (padrão Feature Actions) para vários times, cobrindo frontend, API e BFF e substituindo a falta de padrão anterior.',
       'Liderei a padronização de processos de QA entre times e validei APIs REST com Postman e Swagger.',
     ],
     extraBullets: [

@@ -22,7 +22,7 @@ for (const lang of langs) {
 
   test(`case study page opens from the card and links back (${lang})`, async ({ page }) => {
     await page.goto(paths[lang]);
-    const card = page.locator('.pcard').nth(1);
+    const card = page.locator('.pcard').last();
     const title = (await card.getByRole('heading', { level: 3 }).innerText()).trim();
     await card.getByRole('link', { name: new RegExp(cta[lang]) }).click();
     await expect(page).toHaveURL(new RegExp(`${lang === 'pt' ? '/pt' : ''}/projects/[a-z0-9-]+/$`));
@@ -54,12 +54,40 @@ for (const lang of langs) {
     await expect(page).toHaveURL(new RegExp(`${lang === 'en' ? '/pt' : ''}/projects/[a-z0-9-]+/$`));
   });
 
+  test(`professional case studies are complete and cards show badge and company (${lang})`, async ({ page }) => {
+    await page.goto(paths[lang]);
+    const professional = page.locator('li[data-group="professional"] .pcard');
+    expect(await professional.count()).toBe(3);
+    await expect(professional.first().locator('.badges')).toHaveText(new RegExp(`^${lang === 'en' ? 'Professional' : 'Profissional'}\s*CarBigData$`));
+    await expect(page.locator('.pcard .badges', { hasText: /Featured|Destaque|Personal|Pessoal/ })).toHaveCount(0);
+    const hrefs = await professional.locator('.foot a').evaluateAll((as) => as.map((a) => a.getAttribute('href')!));
+    for (const href of hrefs) {
+      await page.goto(href);
+      const text = await page.locator('main').innerText();
+      expect(text).not.toContain(placeholder[lang]);
+      expect(text).not.toContain('—');
+      await expect(page.locator('.case-body .note').last()).toBeVisible();
+    }
+  });
+
+  test(`CarBigData content has no Xray and no Zallpy (${lang})`, async ({ page }) => {
+    await page.goto(paths[lang]);
+    const job = page.locator('.job.current');
+    await expect(job).toHaveCount(1);
+    const jobText = await job.innerText();
+    expect(jobText).not.toMatch(/Xray|Zallpy/);
+    const card = await page.locator('.pcard', { hasText: 'Playwright MCP' }).innerText();
+    expect(card).not.toMatch(/Xray|Zallpy/);
+    await page.locator('.pcard', { hasText: 'Playwright MCP' }).getByRole('link').click();
+    expect(await page.locator('main').innerText()).not.toMatch(/Xray|Zallpy/);
+  });
+
   for (const theme of ['light', 'dark']) {
     test(`axe finds no violations on case study pages (${lang}, ${theme})`, async ({ page, audit }) => {
       await page.addInitScript((t) => localStorage.setItem('theme', t), theme);
       await page.goto(paths[lang]);
       const hrefs = await page.locator('.pcard .foot a').evaluateAll((as) => as.map((a) => a.getAttribute('href')!));
-      for (const href of [hrefs[0], hrefs[hrefs.length - 1]]) {
+      for (const href of hrefs) {
         await page.goto(href);
         await audit(page);
       }

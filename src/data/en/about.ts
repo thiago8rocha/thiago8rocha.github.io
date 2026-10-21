@@ -8,7 +8,7 @@ export const about: About = {
   currently: [
     'QA at CarBigData, automotive data intelligence',
     'Automation architecture with Playwright BDD and Feature Actions',
-    'Jenkins pipelines and Xray adoption for the team',
+    'Jenkins pipelines triggered by release and hotfix branches',
   ],
   domains: ['Automotive', 'Data intelligence', 'E-commerce', 'Legal tech', 'Mobile devices'],
   highlights: [

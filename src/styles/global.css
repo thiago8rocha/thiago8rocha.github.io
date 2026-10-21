@@ -210,8 +210,8 @@ ul, ol { margin: 0; padding-left: 1.2rem; }
 
 /* projects */
 .badges { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-bottom: 0.8rem; }
-.domain { color: var(--text-muted); font-family: var(--mono); font-size: 0.78rem; }
-.client { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 0.9rem; }
+.card-company { color: var(--text-muted); font-family: var(--mono); font-size: 0.78rem; }
+.subtitle { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 0.9rem; }
 .rolebox { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1rem; font-size: 0.93rem; margin: 1rem 0; color: var(--text-muted); }
 .rolebox strong { color: var(--text); }
 .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.75rem; margin: 1.1rem 0; }
@@ -257,7 +257,9 @@ ul, ol { margin: 0; padding-left: 1.2rem; }
 .case-body { display: grid; gap: clamp(2rem, 4vw, 3rem); max-width: 52rem; }
 .case-body h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin-bottom: 0.9rem; }
 .case-body .chips + h3 + .chips { margin-top: 0.6rem; }
-.case-body .metrics { margin: 0 0 1.25rem; }
+.case-body .metrics { margin: 1.25rem 0 0; }
+.case-body section > h3 { margin: 1.25rem 0 0.6rem; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+.case-body section > h3:first-of-type { margin-top: 0; }
 .case-body .rolebox { margin: 0; font-size: 1rem; }
 .case-body .arch { margin-top: 0.5rem; }
 .case-body .placeholder { margin: 0; padding: 1rem 1.2rem; border: 1px dashed var(--border-strong); border-radius: 10px; color: var(--text-muted); font-family: var(--mono); font-size: 0.88rem; }

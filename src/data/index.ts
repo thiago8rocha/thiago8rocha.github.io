@@ -24,7 +24,4 @@ const content = {
 export const getContent = (lang: Lang) => content[lang];
 export type Content = ReturnType<typeof getContent>;
 export const basePath = (lang: Lang) => (lang === 'en' ? '/' : '/pt/');
-export const allProjects = (lang: Lang) => {
-  const { featured, projects } = getContent(lang);
-  return [featured, ...projects];
-};
+export const allProjects = (lang: Lang) => getContent(lang).projects;

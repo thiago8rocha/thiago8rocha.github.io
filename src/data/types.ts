@@ -43,8 +43,16 @@ export interface Link {
 }
 
 export interface CaseStudyContent {
-  overview?: string[];
-  howItWorks?: string[];
+  meta: { label: string; value: string }[];
+  lead?: string;
+  overview: string[];
+  stats?: { value: string; label: string }[];
+  howItWorks?: { title?: string; steps: string[] }[];
+  aiWorkflow?: { title: string; text: string };
+  role?: { intro?: string; items: string[] };
+  stack?: string[];
+  testingNote?: string;
+  architecture?: { layers: { name: string; detail: string }[]; note: string };
   challenges?: { title: string; challenge: string; approach: string; outcome: string }[];
   achievements?: string[];
 }
@@ -52,23 +60,15 @@ export interface CaseStudyContent {
 export interface Project {
   slug: string;
   title: string;
-  group: 'professional' | 'personal';
+  group: 'professional' | 'opensource';
   badge: string;
-  domain: string;
-  client: string;
+  company?: string;
+  subtitle?: string;
   summary: string;
-  role: string;
   testTypes: string[];
   tools: string[];
   links?: Link[];
   caseStudy?: CaseStudyContent;
-}
-
-export interface FeaturedProject extends Project {
-  metrics: { value: string; label: string }[];
-  layers: { name: string; detail: string }[];
-  layersNote: string;
-  confidentialityNote: string;
 }
 
 export interface SkillGroup {
@@ -100,10 +100,10 @@ export interface Ui {
   hero: { greeting: string; viewProjects: string; downloadResume: string; terminalTitle: string; passed: string };
   about: { currently: string; domains: string; illustrationLabel: string };
   experience: { showMore: string; showLess: string; current: string };
-  projects: { featured: string; filterAll: string; filterLabel: string; filterProfessional: string; filterPersonal: string; role: string; testTypes: string; tools: string; architecture: string; viewCaseStudy: string };
+  projects: { filterAll: string; filterLabel: string; filterProfessional: string; filterOpenSource: string; role: string; testTypes: string; tools: string; architecture: string; viewCaseStudy: string };
   caseStudy: {
-    back: string; client: string; domain: string; overview: string; howItWorks: string; role: string; stack: string; testing: string;
-    architecture: string; challenges: string; challenge: string; approach: string; outcome: string; achievements: string; next: string; placeholder: string;
+    back: string; overview: string; howItWorks: string; role: string; stack: string; testing: string;
+    architecture: string; challenges: string; challenge: string; approach: string; outcome: string; achievements: string; next: string; placeholder: string; confidentiality: string;
   };
   skills: { dailyNote: string };
   contact: { intro: string; cta: string; location: string; formTitle: string; name: string; email: string; message: string; send: string; direct: string };

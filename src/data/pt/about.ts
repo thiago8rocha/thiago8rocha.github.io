@@ -8,7 +8,7 @@ export const about: About = {
   currently: [
     'QA na CarBigData, inteligência de dados automotivos',
     'Arquitetura de automação com Playwright BDD e Feature Actions',
-    'Pipelines Jenkins e adoção do Xray pelo time',
+    'Pipelines no Jenkins disparadas por branches de release e hotfix',
   ],
   domains: ['Automotivo', 'Inteligência de dados', 'E-commerce', 'Judiciário', 'Dispositivos móveis'],
   highlights: [

@@ -16,7 +16,7 @@ export const profile: Profile = {
       '9+ anos em qualidade de software',
       'Certificado ISTQB CTFL',
       'Automação do zero: Playwright, Robot Framework',
-      'Camadas cobertas: API · BFF · Frontend · Visual',
+      'Camadas cobertas: E2E · API · BFF · UI',
       'Produtos para EUA, Canadá e Brasil',
     ],
     summary: 'todas as verificações passaram',
@@ -24,6 +24,6 @@ export const profile: Profile = {
   stats: [
     { value: '9+', unit: 'anos', label: 'Experiência em QA e automação de testes' },
     { value: '5', label: 'Empresas, de dispositivos móveis a dados automotivos' },
-    { value: '4', label: 'Camadas de automação: API, BFF, Frontend, Visual' },
+    { value: '4', label: 'Camadas de automação: E2E, API, BFF, UI' },
   ],
 };
