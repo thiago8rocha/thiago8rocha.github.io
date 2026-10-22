@@ -117,6 +117,12 @@ ul, ol { margin: 0; padding-left: 1.2rem; }
   .nav.open { display: flex; }
   .nav ul { flex-direction: column; width: 100%; }
   .nav .btn { margin: 0.5rem 0 0; }
+  .nav ul a { padding: 0.7rem 0.8rem; }
+}
+@media (max-width: 400px) {
+  .bar { gap: 0.5rem; }
+  .tools { gap: 0.35rem; }
+  .site-header .brand span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 }
 
 /* hero */
@@ -187,7 +193,7 @@ ul, ol { margin: 0; padding-left: 1.2rem; }
 @media (max-width: 800px) { .job { grid-template-columns: 1fr; row-gap: 0.75rem; } .job .node { display: none; } }
 .job .when { font-family: var(--mono); font-size: 0.82rem; color: var(--text-muted); padding-top: 1.45rem; padding-right: 0.5rem; }
 .job .when span { display: block; margin-bottom: 0.3rem; }
-@media (max-width: 800px) { .job .when { padding-top: 0; } }
+@media (max-width: 800px) { .job .when { padding-top: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.6rem; } .job .when span { margin-bottom: 0; } }
 .badge { display: inline-block; padding: 0.1rem 0.6rem; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent); background: var(--accent-soft); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
 .badge.warn { border-color: var(--warn); color: var(--warn); background: var(--warn-soft); }
 .timeline { position: relative; }
@@ -195,6 +201,7 @@ ul, ol { margin: 0; padding-left: 1.2rem; }
 .job.current .node { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
 @media (min-width: 801px) { .timeline::before { content: ''; position: absolute; left: calc(11rem - 0.5px); top: 0; bottom: 0; width: 1px; background: var(--border-strong); } }
 .job .card { grid-column: 3; grid-row: 1; }
+@media (max-width: 800px) { .job .card { grid-column: 1; grid-row: 2; } }
 .job h3 { font-size: 1.3rem; margin-bottom: 0.15rem; }
 .job .company { color: var(--accent); font-weight: 650; }
 .job .place { color: var(--text-muted); font-size: 0.88rem; }
@@ -246,6 +253,8 @@ ul, ol { margin: 0; padding-left: 1.2rem; }
 .case { padding: clamp(32px, 5vw, 56px) 0 clamp(64px, 9vw, 96px); }
 .case .back { display: inline-flex; align-items: center; gap: 0.4rem; margin-bottom: 1.75rem; font-family: var(--mono); font-size: 0.85rem; text-decoration: none; }
 .case .back .icon { transform: rotate(180deg); }
+.case-hero .eyebrow { display: block; }
+.case-hero .eyebrow::after { display: inline-block; vertical-align: middle; margin-left: 0.6rem; }
 .case-hero { padding-bottom: 2rem; margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
 .case-hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 750; letter-spacing: -0.03em; margin-bottom: 0.9rem; max-width: 48rem; }
 .case-hero .lead { color: var(--text-muted); font-size: 1.15rem; max-width: 46rem; }
@@ -304,3 +313,7 @@ form.contact-form { display: grid; gap: 1rem; }
 .foot-links a { color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; }
 .foot-links a:hover { color: var(--accent); }
 .foot-links .icon-link .icon { width: 1.25rem; height: 1.25rem; }
+@media (pointer: coarse) {
+  .foot-links a, .case .back { min-height: 44px; }
+  .foot-links .icon-link { min-width: 44px; justify-content: center; }
+}
